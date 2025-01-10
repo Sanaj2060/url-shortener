@@ -8,12 +8,12 @@ import { Button } from "./ui/button";
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => setMounted(true), []);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -32,7 +32,7 @@ export default function Navbar() {
               onClick={toggleTheme}
             >
               {mounted && (
-                theme === 'dark' ? (
+                resolvedTheme === 'dark' ? (
                   <Sun className="h-5 w-5" />
                 ) : (
                   <Moon className="h-5 w-5" />
