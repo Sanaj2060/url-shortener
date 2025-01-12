@@ -31,13 +31,15 @@ export default function MainForm() {
     setLoading(true);
     setError(null);
 
+    // remove any leading or trailing whitespace from longURL and remove any trailing slashes
+    const cleanLongUrl = longURL.trim().replace(/\/$/, "");
     try {
       const response = await fetch("/api/shorten", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ originalUrl: longURL }),
+        body: JSON.stringify({ originalUrl: cleanLongUrl }),
       });
 
       if (!response.ok) {
